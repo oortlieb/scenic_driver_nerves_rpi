@@ -45,9 +45,8 @@ defmodule Scenic.Driver.Nerves.Rpi.Cache do
 
   # --------------------------------------------------------
   def handle_cast({Scenic.Cache.Dynamic.Texture, :put, key}, %{port: port, ready: true} = state) do
-    Logger.info("Cache putting dynamic texture")
     lds_result = load_dynamic_texture(key, port)
-    Logger.info(inspect lds_result)
+    Logger.info(inspect { "Got :put message", key, lds_result })
     {:noreply, state}
   end
 
@@ -56,13 +55,15 @@ defmodule Scenic.Driver.Nerves.Rpi.Cache do
         {Scenic.Cache.Dynamic.Texture, :delete, key},
         %{port: port, ready: true} = state
       ) do
-    <<
+    fds_result = <<
       @cmd_free_tx_id::unsigned-integer-size(32)-native,
       byte_size(key) + 1::unsigned-integer-size(32)-native,
       key::binary,
       0::size(8)
     >>
     |> Driver.Port.send(port)
+
+    Logger.info(inspect { "Got :delete message", key, fds_result })
 
     {:noreply, state}
   end
