@@ -116,7 +116,7 @@ defmodule Scenic.Driver.Nerves.Rpi.Cache do
       >>
       |> Driver.Port.send(port)
     else
-      err -> IO.inspect(err, label: "load_dynamic_texture")
+      err -> Logger.info(inspect err, label: "load_dynamic_texture")
     end
   end
 end
