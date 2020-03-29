@@ -54,7 +54,12 @@ defmodule Scenic.Driver.Nerves.Rpi.Port do
     try do
       Port.command(port, msg)
     rescue
-      _ -> nil
+      e -> {
+        Loogger.info("PORT ERROR")
+        Logger.info(inspect e)
+        Loogger.info("/PORT ERROR")
+        nil
+      }
     end
   end
 
@@ -70,7 +75,7 @@ defmodule Scenic.Driver.Nerves.Rpi.Port do
   #       dl_id :: unsigned-integer-size(32)-native,
   #     >> }} ->
   #       {:ok, dl_id}
-  #   after 
+  #   after
   #     timeout -> {:err, :timeout}
   #   end
   # end
@@ -128,7 +133,7 @@ defmodule Scenic.Driver.Nerves.Rpi.Port do
   #       tx_id :: unsigned-integer-size(32)-native,
   #     >> }} ->
   #       {:ok, tx_id}
-  #   after 
+  #   after
   #     timeout -> {:err, :timeout}
   #   end
   # end
