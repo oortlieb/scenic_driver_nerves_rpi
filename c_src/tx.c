@@ -190,6 +190,8 @@ void receive_put_tx_pixels(int* p_msg_length, driver_data_t* p_data)
   int id = nvgCreateImageRGBA(p_ctx, header.width, header.height,
     NVG_IMAGE_GENERATE_MIPMAPS, p_tx_pixels);
 
+  printf("New texture from nvgCreateImageRGBA ID is %d\n", id);
+
   // store the key/id pair
   int old_id;
   p_data->p_tx_ids = put_tx_id(p_data->p_tx_ids, p_key, header.key_size, id, &old_id);
