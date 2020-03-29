@@ -12,7 +12,7 @@ defmodule Scenic.Driver.Nerves.Rpi.Cache do
   alias Scenic.Cache.Static
   alias Scenic.Cache.Dynamic
 
-  use Logger
+  require Logger
 
   # @msg_new_tx_id            0x31
 
