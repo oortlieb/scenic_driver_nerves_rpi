@@ -6,6 +6,7 @@
 #
 defmodule Scenic.Driver.Nerves.Rpi.Port do
   @moduledoc false
+  require Logger
 
   @msg_stats_id 0x01
 
@@ -54,12 +55,11 @@ defmodule Scenic.Driver.Nerves.Rpi.Port do
     try do
       Port.command(port, msg)
     rescue
-      e -> {
-        Loogger.info("PORT ERROR")
+      e in RuntimeError ->
+        Logger.info("Port error")
         Logger.info(inspect e)
-        Loogger.info("/PORT ERROR")
+        Logger.info("/Port error")
         nil
-      }
     end
   end
 

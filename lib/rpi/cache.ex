@@ -44,6 +44,7 @@ defmodule Scenic.Driver.Nerves.Rpi.Cache do
   # --------------------------------------------------------
   def handle_cast({Scenic.Cache.Dynamic.Texture, :put, key}, %{port: port, ready: true} = state) do
     load_dynamic_texture(key, port)
+    Logger.info("Cache putting dynamic texture")
     {:noreply, state}
   end
 
